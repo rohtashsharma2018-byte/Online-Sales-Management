@@ -1,0 +1,24 @@
+name: Keep Supabase Active1
+
+on:
+  schedule:
+    # Runs every day at 6:00 UTC
+    - cron: '0 6 * * *'
+
+  # Allows you to run it manually
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          response=$(curl -s \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/laptops?select=*&limit=1")
+
+          echo "Response:"
+          echo "$response"
