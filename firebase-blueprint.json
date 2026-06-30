@@ -1,0 +1,107 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user details and incentives",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user", "blocked"] },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "rental_incentive": { "type": "number" },
+        "sales_incentive": { "type": "number" },
+        "incentive_comments": { "type": "string" }
+      },
+      "required": ["id", "email", "name", "role"]
+    },
+    "Laptop": {
+      "title": "Laptop",
+      "description": "Inventory of laptops available for rent or purchase",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "catalogue_url": { "type": "string" },
+        "price_per_day": { "type": "number" },
+        "price": { "type": "number" },
+        "sell_price": { "type": "number" },
+        "stock": { "type": "number" },
+        "image_url": { "type": "string" },
+        "image_urls": { "type": "array" },
+        "product_code": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "price_per_day", "stock"]
+    },
+    "RentalRequest": {
+      "title": "Rental Request",
+      "description": "A request to rent a laptop",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "laptop_id": { "type": "string" },
+        "laptop_name": { "type": "string" },
+        "email": { "type": "string" },
+        "quantity": { "type": "number" },
+        "pickup_date": { "type": "string", "format": "date-time" },
+        "return_date": { "type": "string", "format": "date-time" },
+        "duration": { "type": "number" },
+        "purpose": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected", "active", "completed", "overdue"] },
+        "total_cost": { "type": "number" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "laptop_id", "laptop_name", "status"]
+    },
+    "PurchaseRequest": {
+      "title": "Purchase Request",
+      "description": "A request to purchase a laptop",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "laptop_id": { "type": "string" },
+        "laptop_name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "quantity": { "type": "number" },
+        "sell_price": { "type": "number" },
+        "total_cost": { "type": "number" },
+        "delivery_date": { "type": "string", "format": "date-time" },
+        "comments": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected", "processing", "delivered", "cancelled"] },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "laptop_id", "laptop_name", "status"]
+    }
+  },
+  "firestore": {
+    "/profiles/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles"
+    },
+    "/laptops/{laptopId}": {
+      "schema": "Laptop",
+      "description": "Laptops inventory"
+    },
+    "/rental_requests/{requestId}": {
+      "schema": "RentalRequest",
+      "description": "Rental requests"
+    },
+    "/purchase_requests/{requestId}": {
+      "schema": "PurchaseRequest",
+      "description": "Purchase requests"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Online Sales Management",
+  "description": "A laptop rental platform allowing users to submit rental requests and admins to manage inventory, approve requests, and track active rentals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
