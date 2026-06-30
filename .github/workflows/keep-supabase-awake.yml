@@ -2,19 +2,18 @@ name: Keep Supabase Active
 
 on:
   schedule:
-    # Runs every day at 06:00 UTC
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * *'   # Every day at 11:30 AM IST
 
   workflow_dispatch:
 
 jobs:
-  ping:
+  keep-alive:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Query Supabase
+      - name: Ping Supabase
         run: |
           curl \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/laptops?select=id&limit=1"
+            -H "apikey: sb_publishable_HHMwxDWdnQylh6icCh0XZQ_r91grAe4" \
+            -H "Authorization: Bearer sb_publishable_HHMwxDWdnQylh6icCh0XZQ_r91grAe4" \
+            "https://jwuoyuhyviqadtmnwgha.supabase.co/rest/v1/laptops?select=id&limit=1"
