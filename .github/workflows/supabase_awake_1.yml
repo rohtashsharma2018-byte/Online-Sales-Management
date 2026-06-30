@@ -1,4 +1,4 @@
-name: Keep Supabase Active
+name: Keep Supabase Active 1
 
 on:
   schedule:
